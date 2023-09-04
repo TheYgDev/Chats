@@ -23,8 +23,8 @@ const Header = () => {
         backgroundColor:
           theme.palette.mode === "light"
             ? "#F8fAff"
-            : theme.palette.background.paper,
-        boxShadow: "0xp 0px 2px rgba(0,0,0,0.25",
+            : theme.palette.background.default,
+        boxShadow: "0px 0px 10px rgba(0,0,0,0.25)",
       }}
     >
       <Stack

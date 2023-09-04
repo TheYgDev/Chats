@@ -24,8 +24,10 @@ const ChatElement = ({ id, name, img, msg, unread, online, time }) => {
         borderRadius: 1,
         backgroundColor:
           theme.palette.mode === "light"
-            ? "#fff"
-            : theme.palette.background.default,
+            ? "#fff" :
+            theme.palette.background.paper,
+            
+        
       }}
       p={2}
     >
@@ -100,8 +102,9 @@ function Chats() {
         backgroundColor:
           theme.palette.mode === "light"
             ? "#F8FAFF"
-            : theme.palette.background.paper,
+            : theme.palette.background.default,
         boxShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)",
+        borderRight:theme.palette.mode === "light"? "":"1px solid black"
       }}
     >
       <Stack p={3} spacing={2} sx={{ height: "100vh" }}>

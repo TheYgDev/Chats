@@ -8,7 +8,7 @@ import {
   ReplyMsg,
   TextMsg,
   TimeLine,
-} from "../MsgTypes";
+} from "./MsgTypes";
 
 function Message() {
   return (

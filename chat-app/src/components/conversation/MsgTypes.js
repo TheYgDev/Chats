@@ -3,12 +3,15 @@ import {
   Divider,
   IconButton,
   Link,
+  Menu,
+  MenuItem,
   Stack,
   Typography,
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import { DownloadSimple, Image } from "phosphor-react";
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
 import React from "react";
+import { Message_options } from "../../data/index";
 
 function TimeLine({ el }) {
   const theme = useTheme();
@@ -30,11 +33,7 @@ function TimeLine({ el }) {
 function DocMsg({ el }) {
   const theme = useTheme();
   return (
-    <Stack
-      direction={"row"}
-      alignItems="center"
-      justifyContent={el.incoming ? "start" : "end"}
-    >
+    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
       <Box
         p={1.5}
         sx={{
@@ -59,12 +58,18 @@ function DocMsg({ el }) {
             <Image size={48} />
             <Typography variant="caption">Abstract.png</Typography>
             <IconButton>
-              <DownloadSimple/>
+              <DownloadSimple />
             </IconButton>
-                  </Stack>
-                  <Typography variant="base2" sx={{color:el.incoming? theme.palette.text:"#fff"}}>{el.message}</Typography>
+          </Stack>
+          <Typography
+            variant="base2"
+            sx={{ color: el.incoming ? theme.palette.text : "#fff" }}
+          >
+            {el.message}
+          </Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 }
@@ -72,11 +77,7 @@ function DocMsg({ el }) {
 function ReplyMsg({ el }) {
   const theme = useTheme();
   return (
-    <Stack
-      direction={"row"}
-      alignItems="center"
-      justifyContent={el.incoming ? "start" : "end"}
-    >
+    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
       <Box
         p={1.5}
         sx={{
@@ -108,6 +109,7 @@ function ReplyMsg({ el }) {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 }
@@ -115,11 +117,7 @@ function ReplyMsg({ el }) {
 function MediaMsg({ el }) {
   const theme = useTheme();
   return (
-    <Stack
-      direction={"row"}
-      alignItems="center"
-      justifyContent={el.incoming ? "start" : "end"}
-    >
+    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
       <Box
         p={1.5}
         sx={{
@@ -146,6 +144,7 @@ function MediaMsg({ el }) {
           </Typography>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 }
@@ -153,11 +152,7 @@ function MediaMsg({ el }) {
 function TextMsg({ el }) {
   const theme = useTheme();
   return (
-    <Stack
-      direction={"row"}
-      alignItems="center"
-      justifyContent={el.incoming ? "start" : "end"}
-    >
+    <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
       <Box
         p={1.5}
         sx={{
@@ -175,6 +170,7 @@ function TextMsg({ el }) {
           {el.message}
         </Typography>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 }
@@ -219,17 +215,60 @@ function LinkMsg({ el }) {
                 www.youtube.com
               </Typography>
             </Stack>
+          </Stack>
             <Typography
               variant="body2"
               color={el.incoming ? theme.palette.text : "#fff"}
             >
               {el.message}
             </Typography>
-          </Stack>
         </Stack>
       </Box>
+      <MessageOptions />
     </Stack>
   );
 }
+
+function MessageOptions() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <DotsThreeVertical
+        cursor={"pointer"}
+        size={20}
+        id="basic-button"
+        aria-controls={open ? "basic-menu" : undefined}
+        aria-haspopup="true"
+        aria-expanded={open ? "true" : undefined}
+        onClick={handleClick}
+      />
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          "aria-labelledby": "basic-button",
+        }}
+      >
+        <Stack spacing={1} px={1}>
+          {Message_options.map((el) => (
+            <MenuItem onClick={handleClick}>{el.title}</MenuItem>
+          ))}
+        </Stack>
+      </Menu>
+    </>
+  );
+}
+
+export default MessageOptions;
 
 export { DocMsg, LinkMsg, MediaMsg, ReplyMsg, TextMsg, TimeLine };
