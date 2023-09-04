@@ -11,36 +11,8 @@ import {
 } from "@mui/material";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { ArchiveBox, CircleDashed, MagnifyingGlass } from "phosphor-react";
-import { SimpleBarStyle } from "../../components/Scrollbar";
+import StyledBadge from "../../components/StyledBadge";
 import { ChatList } from "../../data";
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  "& .MuiBadge-badge": {
-    backgroundColor: "#44b700",
-    color: "#44b700",
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    "&::after": {
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      borderRadius: "50%",
-      animation: "ripple 1.2s infinite ease-in-out",
-      border: "1px solid currentColor",
-      content: '""',
-    },
-  },
-  "@keyframes ripple": {
-    "0%": {
-      transform: "scale(.8)",
-      opacity: 1,
-    },
-    "100%": {
-      transform: "scale(2.4)",
-      opacity: 0,
-    },
-  },
-}));
 
 const ChatElement = ({ id, name, img, msg, unread, online, time }) => {
   const theme = useTheme();
@@ -163,11 +135,17 @@ function Chats() {
           <Divider />
         </Stack>
         <Stack
-          spacing={2}
           direction="column"
-          sx={{ flexGrow: 1, overflow: "scroll", height: "100%" }}
+          sx={{
+            flexGrow: 1,
+            height: "100%",
+            overflow: "scroll",
+            overflowY: "hidden",
+            overflowX: "hidden",
+          }}
         >
-          {/* <SimpleBarStyle timeout={500} clickOnTrack={false}> */}
+          <div className="scrollbar" style={{ overflowY: "auto" }}>
+            <Stack spacing={2}>
               <Stack spacing={2.4}>
                 <Typography variant="subtitle2" sx={{ color: "#676767" }}>
                   Pinned
@@ -184,7 +162,8 @@ function Chats() {
                   return <ChatElement {...el} />;
                 })}
               </Stack>
-          {/* </SimpleBarStyle> */}
+            </Stack>
+          </div>
         </Stack>
       </Stack>
     </Box>
