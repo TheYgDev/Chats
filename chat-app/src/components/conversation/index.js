@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import React from "react";
 import Fotter from "./Fotter";
 import Header from "./Header";
@@ -14,7 +14,7 @@ function Conversation() {
         width={"100%"}
         sx={{ flexGrow: 1, overflow: "scroll", overflowX: "hidden",overflowY: "hidden"  }}>
         <div className="scrollbar" style={{ overflowY: "auto" }}>
-          <Message />
+          <Message menu={true} />
         </div>
       </Stack>
       {/* chat Fotter */}

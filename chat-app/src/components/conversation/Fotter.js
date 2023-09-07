@@ -56,8 +56,8 @@ const Actions = [
 ];
 
 function ChatInput({ setOpenPicker }) {
-  const [openActions, setOpenActions] = React.useState(false)
-  
+  const [openActions, setOpenActions] = React.useState(false);
+
   return (
     <StyledInput
       fullWidth
@@ -67,8 +67,13 @@ function ChatInput({ setOpenPicker }) {
         disableUnderline: true,
         startAdornment: (
           <Stack sx={{ width: "max-content" }}>
-            <Stack sx={{ position: "relative",display:openActions? "inline-block":"none"   }}>
-            {Actions.map((el) => (
+            <Stack
+              sx={{
+                position: "relative",
+                display: openActions ? "inline-block" : "none",
+              }}
+            >
+              {Actions.map((el) => (
                 <Tooltip placement="right" title={el.title}>
                   <Fab
                     sx={{
@@ -84,9 +89,11 @@ function ChatInput({ setOpenPicker }) {
               ))}
             </Stack>
             <InputAdornment>
-              <IconButton onClick={() => {
-                      setOpenActions(!openActions);
-                    }}>
+              <IconButton
+                onClick={() => {
+                  setOpenActions(!openActions);
+                }}
+              >
                 <LinkSimple />
               </IconButton>
             </InputAdornment>
@@ -121,8 +128,7 @@ function Footer() {
           theme.palette.mode === "light"
             ? "#F8fAff"
             : theme.palette.background.default,
-        boxShadow: "0px 0px 10px rgba(0,0,0,0.25)",
-
+        boxShadow: "0px 0px 2px rgba(0,0,0,0.25)",
       }}
     >
       <Stack direction={"row"} alignItems={"center"} spacing={3}>

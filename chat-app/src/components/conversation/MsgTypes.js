@@ -30,7 +30,7 @@ function TimeLine({ el }) {
   );
 }
 
-function DocMsg({ el }) {
+function DocMsg({ el ,menu}) {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -69,12 +69,13 @@ function DocMsg({ el }) {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
+
     </Stack>
   );
 }
 
-function ReplyMsg({ el }) {
+function ReplyMsg({ el,menu }) {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -109,12 +110,13 @@ function ReplyMsg({ el }) {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
+
     </Stack>
   );
 }
 
-function MediaMsg({ el }) {
+function MediaMsg({ el,menu }) {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -144,12 +146,12 @@ function MediaMsg({ el }) {
           </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
     </Stack>
   );
 }
 
-function TextMsg({ el }) {
+function TextMsg({ el,menu }) {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -170,12 +172,13 @@ function TextMsg({ el }) {
           {el.message}
         </Typography>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
+
     </Stack>
   );
 }
 
-function LinkMsg({ el }) {
+function LinkMsg({ el,menu }) {
   const theme = useTheme();
   return (
     <Stack direction={"row"} justifyContent={el.incoming ? "start" : "end"}>
@@ -224,7 +227,8 @@ function LinkMsg({ el }) {
             </Typography>
         </Stack>
       </Box>
-      <MessageOptions />
+      {menu && <MessageOptions />}
+
     </Stack>
   );
 }
