@@ -11,18 +11,54 @@ import {
 import { useTheme } from "@mui/material/styles";
 import { Gear } from "phosphor-react";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/Images/logo.ico";
 import AntSwitch from "../../components/AntSwitch";
 import { Nav_Buttons, Profile_Menu } from "../../data";
 import useSettings from "../../hooks/useSettings";
 
+const getPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/app";
+    case 1:
+      return "/group";
+
+    case 2:
+      return "/call";
+
+    case 3:
+      return "/settings";
+
+    default:
+      break;
+  }
+};
+const getMenuPath = (index) => {
+  switch (index) {
+    case 0:
+      return "/profile";
+    case 1:
+      return "/settings";
+
+    case 2:
+      //TODO => update token set isauth = false
+      return "/auth/login";
+
+    default:
+      break;
+  }
+};
+
 function SideBar() {
   const theme = useTheme();
+  const navigate = useNavigate();
   const [selected, setSelected] = useState(0);
   const { onToggleMode } = useSettings();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -45,7 +81,7 @@ function SideBar() {
         direction="column"
         alignItems={"center"}
         justifyContent={"space-between"}
-        sx={{ height: "100%", }}
+        sx={{ height: "100%" }}
       >
         <Stack alignItems={"center"} spacing={4}>
           <Box
@@ -84,6 +120,7 @@ function SideBar() {
                 <IconButton
                   onClick={() => {
                     setSelected(el.index);
+                    navigate(getPath(el.index));
                   }}
                   sx={{
                     width: "max-content",
@@ -122,6 +159,7 @@ function SideBar() {
                 }}
                 onClick={() => {
                   setSelected(3);
+                  navigate(getPath(3));
                 }}
               >
                 <Gear />
@@ -138,7 +176,7 @@ function SideBar() {
             defaultChecked
           />
           <Avatar
-            sx={{cursor:"pointer"}}
+            sx={{ cursor: "pointer" }}
             src={faker.image.avatar()}
             id="basic-button"
             aria-controls={open ? "basic-menu" : undefined}
@@ -164,9 +202,16 @@ function SideBar() {
             }}
           >
             <Stack spacing={1} px={1}>
-              {Profile_Menu.map((el) => (
-                <MenuItem onClick={handleClick}>
+              {Profile_Menu.map((el, idx) => (
+                <MenuItem
+                  onClick={() => {
+                    handleClick();
+                  }}
+                >
                   <Stack
+                    onClick={() => {
+                      navigate(getMenuPath(idx));
+                    }}
                     sx={{ width: 100 }}
                     direction={"row"}
                     alignItems={"center"}

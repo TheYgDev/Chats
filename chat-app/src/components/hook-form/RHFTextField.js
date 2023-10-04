@@ -6,6 +6,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 RHFTextField.propTypes = {
   name: PropTypes.string,
+  label: PropTypes.string,
   helperText: PropTypes.node,
 };
 
